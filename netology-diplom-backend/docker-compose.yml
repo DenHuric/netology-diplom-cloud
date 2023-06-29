@@ -1,0 +1,32 @@
+version: '2.2'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: 'cloud_authorization'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - 3306:3306
+    volumes:
+      - my-db:/var/lib/mysql
+  frontend:
+    image: node:14
+    working_dir: /app
+    volumes:
+      - $PWD/../netology-diplom-frontend:/app
+    ports:
+      - 8080:8080
+    command: sh -c "npm install && npm run serve"
+  backend:
+    image: openjdk:17
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: java -jar build/libs/netology-diplom-backend-0.0.1-SNAPSHOT.jar
+    ports:
+      - 8081:8081
+    depends_on:
+      - db
+
+volumes:
+  my-db:

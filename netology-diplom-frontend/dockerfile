@@ -1,0 +1,6 @@
+FROM node:14
+WORKDIR /APP
+COPY . .
+EXPOSE 8080
+RUN npm install
+CMD ["npm", "run", "serve"]

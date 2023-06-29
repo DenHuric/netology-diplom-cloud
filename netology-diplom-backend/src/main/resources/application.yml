@@ -1,0 +1,18 @@
+server:
+  port: 8081
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: jdbc:mysql://172.17.0.1:3306/cloud_authorization
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: create
+cloud:
+  storeDirectory: /opt/cloud/store
