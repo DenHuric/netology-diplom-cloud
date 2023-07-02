@@ -3,7 +3,6 @@ package com.dhuric.projects.netology_diploma_cloud_backend.integrationTests.serv
 import com.dhuric.projects.netology_diploma_cloud_backend.NetologyDiplomaCloudBackendApplication;
 import com.dhuric.projects.netology_diploma_cloud_backend.entities.UserCredentials;
 import com.dhuric.projects.netology_diploma_cloud_backend.models.Login;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

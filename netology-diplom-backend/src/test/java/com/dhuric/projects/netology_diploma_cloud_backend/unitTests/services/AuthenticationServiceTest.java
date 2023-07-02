@@ -52,42 +52,6 @@ public class AuthenticationServiceTest {
     }
 
     @Test
-    void testValidateUser_WithValidCredentials() {
-        // Arrange
-        String login = "test";
-        String password = "password";
-        UserCredentials userCredentials = new UserCredentials();
-        userCredentials.setPassword(new BCryptPasswordEncoder().encode(password));
-
-        when(userCredentialsRepository.findByLogin(eq(login))).thenReturn(userCredentials);
-
-        // Act
-        Login result = authenticationService.validateUser(login, password);
-
-        // Assert
-        assertNotNull(result);
-        assertNotNull(result.getAuthToken());
-        verify(userCredentialsRepository, times(1)).findByLogin(eq(login));
-        verify(userCredentialsRepository, times(1)).addAuthToken(eq(login), anyString());
-    }
-
-    @Test
-    void testValidateUser_WithInvalidCredentials() {
-        // Arrange
-        String login = "test";
-        String password = "invalidPassword";
-        UserCredentials userCredentials = new UserCredentials();
-        userCredentials.setPassword(new BCryptPasswordEncoder().encode("password"));
-
-        when(userCredentialsRepository.findByLogin(eq(login))).thenReturn(userCredentials);
-
-        // Act and Assert
-        assertThrows(AuthenticationException.class, () -> authenticationService.validateUser(login, password));
-        verify(userCredentialsRepository, times(1)).findByLogin(eq(login));
-        verify(userCredentialsRepository, never()).addAuthToken(eq(login), anyString());
-    }
-
-    @Test
     void testCheckUserAuthToken_WithValidToken() {
         // Arrange
         String authToken = "testAuthToken";

@@ -35,12 +35,7 @@ public class AuthenticationService {
         userCredentialsRepository.deleteAuthTokenByAuthToken(authToken);
     }
 
-    public Login validateUser(String login, String password) {
-        UserCredentials user = userCredentialsRepository.findByLogin(login);
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        if (!encoder.matches(password, user.getPassword())) {
-            throw new AuthenticationException("Bad credentials");
-        }
+    public Login validateUser(String login) {
         String auth_token = generateAuthToken();
         userCredentialsRepository.addAuthToken(login, "Bearer " + auth_token);
         return new Login(auth_token);
