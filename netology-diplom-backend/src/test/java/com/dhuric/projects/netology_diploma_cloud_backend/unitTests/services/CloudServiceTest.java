@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,6 +23,8 @@ import static org.mockito.Mockito.*;
 public class CloudServiceTest {
     @Mock
     private CloudRepository cloudRepository;
+    @Mock
+    Logger logger;
     @Mock
     private AuthenticationService authenticationService;
     private CloudService cloudService;
@@ -93,7 +96,7 @@ public class CloudServiceTest {
 
 
     @Test
-    void saveFile_ValidFileDataAndAuthToken_NoExceptionThrown() throws InputDataException {
+    void saveFile_ValidFileDataAndAuthToken_NoExceptionThrown() throws InputDataException, FileException {
         byte[] fileData = "File data".getBytes();
         String fileName = "file.txt";
         String authToken = "validAuthToken";

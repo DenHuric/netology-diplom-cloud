@@ -6,18 +6,10 @@ import com.dhuric.projects.netology_diploma_cloud_backend.exceprions.InputDataEx
 import com.dhuric.projects.netology_diploma_cloud_backend.services.AuthenticationService;
 import com.dhuric.projects.netology_diploma_cloud_backend.services.CloudService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -29,7 +21,7 @@ public class CloudController {
 
     @PostMapping("/file")
     public void uploadFile(@RequestHeader("Auth-Token") String authToken,
-                           @RequestBody MultipartFile file) throws InputDataException, IOException {
+                           @RequestBody MultipartFile file) throws InputDataException, IOException, FileException {
         cloudService.saveFile(file.getBytes(), file.getOriginalFilename(), authToken);
     }
 
@@ -56,7 +48,7 @@ public class CloudController {
             @RequestParam("filename") String fileName,
             @RequestBody String newFileName
     ) throws FileException, InputDataException {
-        cloudService.renameFile(fileName, newFileName,authToken);
+        cloudService.renameFile(fileName, newFileName, authToken);
     }
 
     @GetMapping("/list")
@@ -64,6 +56,6 @@ public class CloudController {
             @RequestHeader("auth-token") String authToken,
             @RequestParam(name = "limit", defaultValue = "10") int limit
     ) throws FileException, InputDataException {
-        return cloudService.listFiles(limit,authToken);
+        return cloudService.listFiles(limit, authToken);
     }
 }

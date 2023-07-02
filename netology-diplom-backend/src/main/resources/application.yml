@@ -16,3 +16,4 @@ spring:
       ddl-auto: create
 cloud:
   storeDirectory: /opt/cloud/store
+  logDirectory: /opt/cloud/logs
