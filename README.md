@@ -44,6 +44,9 @@ mv in directory netology-diplom-backend and run:
   gradle build
   docker compode up
 ```
+## Login
+![image](https://github.com/DenHuric/netology-diplom-cloud/assets/46518725/d2ce8365-c6b6-4ac5-8d21-3f616df0c067)
+Use login=user&password=user
 
 
 ## Authors
